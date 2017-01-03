@@ -16,16 +16,12 @@
                 <a class="navbar-brand" href="#/">Main</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/login">Login</a></li>
+                <li><a href="#">Register</a></li>
+                <li ng-show="user"><a href="#" ng-controller="logoutController" ng-click="logout()">Logout</a></li>
+            </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
@@ -40,7 +36,10 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
+
 <script src="./main.js"></script>
+<script src="./services.js"></script>
+<script src="./controllers.js"></script>
 
 </body>
 
