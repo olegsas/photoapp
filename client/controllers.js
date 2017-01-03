@@ -1,6 +1,6 @@
 angular.module('myApp').controller('loginController',
-  ['$scope', '$rootScope', '$location', 'AuthService',
-  function ($scope, $rootScope, $location, AuthService) {
+  ['$scope', '$location', 'AuthService',
+  function ($scope, $location, AuthService) {
 
     $scope.login = function () {
 
@@ -14,7 +14,6 @@ angular.module('myApp').controller('loginController',
         .then(function () {
           $location.path('/');
           $scope.disabled = false;
-          $rootScope.user = true;
           $scope.loginForm = {};
         })
         // handle error
@@ -30,15 +29,14 @@ angular.module('myApp').controller('loginController',
 }]);
 
 angular.module('myApp').controller('logoutController',
-  ['$scope', '$rootScope', '$location', 'AuthService',
-  function ($scope, $rootScope, $location, AuthService) {
+  ['$scope', '$location', 'AuthService',
+  function ($scope, $location, AuthService) {
 
     $scope.logout = function () {
       // call logout from service
       AuthService.logout()
         .then(function () {
           $location.path('/');
-          $rootScope.user = false;
         });
 
     };

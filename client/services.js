@@ -1,6 +1,6 @@
 angular.module('myApp').factory('AuthService',
-  ['$q', '$timeout', '$http',
-  function ($q, $timeout, $http) {
+  ['$q', '$timeout', '$http', '$rootScope',
+  function ($q, $timeout, $http, $rootScope) {
 
     // create user variable
     var user = null;
@@ -28,8 +28,10 @@ angular.module('myApp').factory('AuthService',
       .success(function (data) {
         if(data.status){
           user = true;
+          $rootScope.user = true;
         } else {
           user = false;
+          $rootScope.user = false;
         }
       })
       // handle error
@@ -37,7 +39,7 @@ angular.module('myApp').factory('AuthService',
         user = false;
       });
     }
-
+    
     function login(username, password) {
 
       // create a new instance of deferred
