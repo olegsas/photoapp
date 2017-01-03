@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var passportGithub = require('../auth/github');
 
 var User = require('../models/user.js');
 
@@ -61,5 +62,16 @@ router.get('/status', function(req, res) {
     status: true
   });
 });
+
+// github auth
+router.get('/auth/github', passportGithub.authenticate('github', { scope: [ 'user:email' ] }));
+
+router.get('/auth/github/callback',
+  passportGithub.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication
+    console.log('sucess')
+    res.json(req.user);
+  });
 
 module.exports = router;
