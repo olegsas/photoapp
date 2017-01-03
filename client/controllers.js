@@ -44,3 +44,34 @@ angular.module('myApp').controller('logoutController',
     };
 
 }]);
+
+angular.module('myApp').controller('registerController',
+  ['$scope', '$location', 'AuthService',
+  function ($scope, $location, AuthService) {
+
+    $scope.register = function () {
+
+      // initial values
+      $scope.error = false;
+      $scope.disabled = true;
+
+      // call register from service
+      AuthService.register($scope.registerForm.username, $scope.registerForm.password)
+        // handle success
+        .then(function () {
+          $location.path('/login');
+          $scope.disabled = false;
+          $scope.registerForm = {};
+        })
+        // handle error
+        .catch(function (err) {
+
+          $scope.error = true;
+          $scope.errorMessage = err.err.message;
+          $scope.disabled = false;
+          $scope.registerForm = {};
+        });
+
+    };
+
+}]);

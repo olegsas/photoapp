@@ -108,7 +108,7 @@ angular.module('myApp').factory('AuthService',
         })
         // handle error
         .error(function (data) {
-          deferred.reject();
+          deferred.reject(data);
         });
 
       // return promise object
