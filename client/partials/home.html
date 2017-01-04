@@ -1,5 +1,12 @@
-<h1>Yo!</h1>
-<h2>{{test}}</h2>
+<br>
+Photo:
+<input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="10MB" required ngf-model-invalid="errorFile">
+<button ng-click="uploadPic(picFile)">Submit</button>
+<span ng-show="picFile.result">Upload Successful</span>
+<span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+<br>
+<br>
+<br>
 <div class="row">
     <div ng-repeat="picture in pictures" class="col-lg-3 col-md-4 col-xs-6 thumb">
         <span class="thumbnail" href="#">

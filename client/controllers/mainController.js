@@ -1,5 +1,5 @@
-angular.module('myApp').controller('mainController', ['$scope',
-  function ($scope) {
+angular.module('myApp').controller('mainController', ['$scope', '$http', 'Upload', '$timeout',
+  function ($scope, $http, Upload, $timeout) {
 
     $scope.test = 'Hello'
 
@@ -12,6 +12,26 @@ angular.module('myApp').controller('mainController', ['$scope',
       'http://problemwildlifemanagement.com/wp-content/uploads/2011/07/racoon.jpg',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJmmMYR90khubAHFF3TPFbm5Oah03FjW9eYn-z9OGt86ECMg3s'
     ]
+
+    $scope.uploadPic = function(file) {
+      console.log(file)
+    file.upload = Upload.upload({
+      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      data: {file: file},
+    });
+
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    }
 
   }
 ]);
