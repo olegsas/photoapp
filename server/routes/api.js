@@ -63,15 +63,4 @@ router.get('/status', function(req, res) {
   });
 });
 
-// github auth
-router.get('/auth/github', passportGithub.authenticate('github', { scope: [ 'user:email' ] }));
-
-router.get('/auth/github/callback',
-  passportGithub.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication
-    console.log('sucess')
-    res.json(req.user);
-  });
-
 module.exports = router;

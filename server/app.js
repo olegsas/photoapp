@@ -22,6 +22,7 @@ var app = express();
 
 // require routes
 var routes = require('./routes/api.js');
+var authRoutes = require('./routes/auth.js')
 
 // define middleware
 app.use(express.static(path.join(__dirname, '../client')));
@@ -44,6 +45,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // routes
+app.use('/auth', authRoutes);
 app.use('/user/', routes);
 
 app.get('/', function(req, res) {
