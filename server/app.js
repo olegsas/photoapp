@@ -21,8 +21,9 @@ var User = require('./models/user.js');
 var app = express();
 
 // require routes
-var routes = require('./routes/api.js');
-var authRoutes = require('./routes/auth.js')
+var userRoutes = require('./routes/api.js');
+var authRoutes = require('./routes/auth.js');
+var pictureRoutes = require('./routes/pictures.js');
 
 // define middleware
 app.use(express.static(path.join(__dirname, '../client')));
@@ -46,7 +47,8 @@ passport.deserializeUser(User.deserializeUser());
 
 // routes
 app.use('/auth', authRoutes);
-app.use('/user/', routes);
+app.use('/user', userRoutes);
+app.use('/pictures', pictureRoutes);
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
